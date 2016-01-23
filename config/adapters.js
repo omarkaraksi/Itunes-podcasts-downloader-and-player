@@ -5,7 +5,7 @@ module.exports.adapters = {
 
 	// If you leave the adapter config unspecified 
 	// in a model definition, 'default' will be used.
-	'default': 'memory',
+	//'default': 'sails-redis',
 	
 	// In-memory adapter for DEVELOPMENT ONLY
 	// (data is NOT preserved when the server shuts down)
@@ -33,5 +33,7 @@ module.exports.adapters = {
 		user		: 'YOUR_MYSQL_USER',
 		password	: 'YOUR_MYSQL_PASSWORD',
 		database	: 'YOUR_MYSQL_DB'
-	}
+	},
+
+	
 };

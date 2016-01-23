@@ -4,6 +4,7 @@
   "dependencies": {
     "express": "~3.2.6",
     "sails": "~0.8.9",
+    "sails-redis": "^0.10.7",
     "xml2js": "^0.4.16"
   },
   "devDependencies": {

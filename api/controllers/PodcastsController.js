@@ -13,27 +13,36 @@ var PodcastsController = {
 		PodcastsService.search(term,entity,
 			function(body){
 				data = body;
-				
-				PodcastsService.proccessFeedData(body,
-					function(feed,isLast){
-						feed =JSON.parse(feed)
-						
-						console.log(feed.rss.channel[0].item[0].enclosure[0].$.url);
-						
-						if(!isLast){
+				PodcastsService.saveSearcResults(body,
+					function(err,results){
+						console.log(results);
+						PodcastsService.proccessFeedData(results,
+							function(feed,isLast,podcastId){
+								feed =JSON.parse(feed)
+								
+								PodcastsService.ParseAndSaveFeed(feed,podcastId)
+								
+								if(!isLast){
 
-							//res.write(feed)
-						}else{
-							//console.log(feed.rss.channel[0].item[0].enclosure)
-							//res.write(feed.rss)
-							//res.setHeader('Content-Type', 'application/json');
-							res.end()
-						}
-					}	
-				)
-				
-				
-				
+									//res.write(feed)
+								}else{
+									//console.log(feed.rss.channel[0].item[0].enclosure)
+									//res.write(feed.rss)
+									//res.setHeader('Content-Type', 'application/json');
+									res.end()
+								}
+							}	
+						)
+
+						var d = {}
+						//console.log(results)
+						d.track_title = 'testt';
+						d.track_mp3_url = "test.mp3",
+						d.owner = results.id;
+						Tracks.create(d,function(err,results){
+							//console.log(results)
+						})
+					});
 			}
 		);
 

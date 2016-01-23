@@ -4,7 +4,7 @@ module.exports = {
 	appName: "Sails Application",
 
 	// Port this Sails application will live on
-	port: 1335,
+	port: 1339,
 
 	// The environment the app is deployed in 
 	// (`development` or `production`)
@@ -29,6 +29,21 @@ module.exports = {
 
 	express: {
 		customMiddleware: function(app) {
+
+			// var redis = require('redis');
+			// var client = redis.createClient(17907, 'pub-redis-17907.us-east-1-2.1.ec2.garantiadata.com', {no_ready_check: true});
+			// client.auth(')neverforgetyourpassword(', function (err) {
+			//     if (err)  
+			//     	throw err;
+			// });
+
+			// client.on('connect', function() {
+			//     console.log('Connected to Redis');
+			// });
+
+
+
+
 			var express = require('express');
 			
 			app.use(express['static'](process.cwd() + '/api'));

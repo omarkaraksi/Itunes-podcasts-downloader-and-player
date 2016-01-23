@@ -3,7 +3,7 @@
 	-> model
 ---------------------*/
 module.exports = {
-
+	connection : 'redis',
 	attributes	: {
 
 		// Simple attribute:
