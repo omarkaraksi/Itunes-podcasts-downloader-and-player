@@ -27,7 +27,7 @@ module.exports = {
 		level: 'info'
 	},
 
-	express: {
+	http: {
 		customMiddleware: function(app) {
 
 			// var redis = require('redis');

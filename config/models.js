@@ -1,3 +1,4 @@
 module.exports.models = {
-	connection: 'redis'
+	connection : 'redis',
+	migrate	   : 'safe'
 }

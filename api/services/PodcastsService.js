@@ -3,12 +3,17 @@ var parseString = require('xml2js').parseString;
 module.exports = {
 
 	search : function(term,entity,callback){
-	 var term =  term!='' ? '?term='+term : '';
-	 var entity = entity!='' ? '&entity='+entity : '';
-	 var limit =  '&limit=50' ;
+	 
+
+	 var term   = term!='' ?  "?term="+term : "" ;
+	 var entity = entity!='' ?  "&entity="+entity : "";
+	 //console.log(entity)
+	 //sleep(4000)
+	 var limit =  "&limit=50" ;
 	 if(term){
 	 	var results = [];
-	 	request.get("https://itunes.apple.com/search"+term+entity+limit,
+	 	var url = "https://itunes.apple.com/search"+term+entity+limit
+	 	request.get(url.toString(),
 		 	function(err,response,body){
 		 		data = JSON.parse(body);
 		 		callback(data);

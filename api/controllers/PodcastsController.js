@@ -34,20 +34,78 @@ var PodcastsController = {
 							}	
 						)
 
-						var d = {}
-						//console.log(results)
-						d.track_title = 'testt';
-						d.track_mp3_url = "test.mp3",
-						d.owner = results.id;
-						Tracks.create(d,function(err,results){
-							//console.log(results)
-						})
+						
 					});
 			}
 		);
-
+		res.end()
 	},
+	searchPodcasts :function(req,res){
+		var term     = req.query.term;
+		var mypodCasts = Podcasts.find({
+			or : [
+				{'podcast_title' : term},
+				{
+				'podcast_title' : {
+					'contains' : term
+				 }	
+				},
+				{
+				'podcast_title' : {
+					'like' : '%'+term
+				 }	
+				},
+				{'podcast_title' : {
+					'like' : term+'%'
+					},
+				}
+			]
+		},function(err,results){
+			console.log(results)
+			res.json(results)
+		})	
+	},
+	searchTracks :function(req,res){
+		var podId 		=  req.query.id || null ;
+		var tracktitle =  req.query.title || null;
+		var findby = [];
+		var findyId = {}	
+		if(podId){
+			Tracks.find({'owner':podId,limit:50},function(err,results){
+				res.json(results)
+			})		
+		}else if(tracktitle){
+			findby.push(
+				{	'track_title' : tracktitle},
+				{
+					'track_title' : {
+						'contains' : tracktitle
+					}
+				},
+				{	
+				    'track_title' : {
+						'like' : '%'+tracktitle
+					}
+				},
+				{	
+					'track_title' : {
+						'like' : tracktitle+'%'
+				 	}
+				}	
+			)
 
+			Tracks.find({'or':findby,limit:50},function(err,results){
+				res.json(results)
+			})		
+
+		}
+
+		
+			
+	},
+	searchTracksById :function(req,res){
+
+	}
 
 		
 }
