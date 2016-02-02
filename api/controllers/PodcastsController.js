@@ -1,7 +1,7 @@
 var request = require('request');
 var PodcastsController = {
 	index :function(req,res){
-		//console.log(req)	
+		//console.log(req)
 		return res.json({
 		 	//'data' : 'Podcasts Test'
 		})
@@ -19,9 +19,9 @@ var PodcastsController = {
 						PodcastsService.proccessFeedData(results,
 							function(feed,isLast,podcastId){
 								feed =JSON.parse(feed)
-								
+
 								PodcastsService.ParseAndSaveFeed(feed,podcastId)
-								
+
 								if(!isLast){
 
 									//res.write(feed)
@@ -31,10 +31,10 @@ var PodcastsController = {
 									//res.setHeader('Content-Type', 'application/json');
 									res.end()
 								}
-							}	
+							}
 						)
 
-						
+
 					});
 			}
 		);
@@ -48,32 +48,33 @@ var PodcastsController = {
 				{
 				'podcast_title' : {
 					'contains' : term
-				 }	
+				 }
 				},
 				{
 				'podcast_title' : {
 					'like' : '%'+term
-				 }	
+				 }
 				},
 				{'podcast_title' : {
 					'like' : term+'%'
 					},
 				}
 			]
-		},function(err,results){
-			console.log(results)
+		,limit:10},function(err,results){
 			res.json(results)
-		})	
+		})
 	},
 	searchTracks :function(req,res){
 		var podId 		=  req.query.id || null ;
+
 		var tracktitle =  req.query.title || null;
+		console.log(tracktitle);
 		var findby = [];
-		var findyId = {}	
+		var findyId = {}
 		if(podId){
-			Tracks.find({'owner':podId,limit:50},function(err,results){
+			Tracks.find({'owner':podId,limit:12},function(err,results){
 				res.json(results)
-			})		
+			})
 		}else if(tracktitle){
 			findby.push(
 				{	'track_title' : tracktitle},
@@ -82,31 +83,31 @@ var PodcastsController = {
 						'contains' : tracktitle
 					}
 				},
-				{	
+				{
 				    'track_title' : {
 						'like' : '%'+tracktitle
 					}
 				},
-				{	
+				{
 					'track_title' : {
 						'like' : tracktitle+'%'
 				 	}
-				}	
+				}
 			)
 
-			Tracks.find({'or':findby,limit:50},function(err,results){
+			Tracks.find({'or':findby,limit:12},function(err,results){
 				res.json(results)
-			})		
+			})
 
 		}
 
-		
-			
+
+
 	},
 	searchTracksById :function(req,res){
 
 	}
 
-		
+
 }
 module.exports = PodcastsController

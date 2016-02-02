@@ -1,5 +1,5 @@
 module.exports = {
-
+	//connection : 'someMongoDb',
 	attributes : {
 		podcast_title: 'STRING',
 		podcast_description : 'TEXT',

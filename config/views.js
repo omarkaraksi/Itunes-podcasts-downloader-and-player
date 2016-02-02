@@ -1,5 +1,6 @@
-module.exports = {
-	views :{
-		engine :'ejs'
-	}	
+module.exports.views = {
+	layout :false,
+	// views :{
+	// 	engine :'ejs'
+	// }
 };
