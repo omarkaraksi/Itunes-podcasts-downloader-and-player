@@ -1,0 +1,18 @@
+<ion-view view-title="Search" ng-controller="SearchCtrl as srch">
+
+  <ion-content>
+    <div class='list' >
+      <form name="form" ng-submit="srch.search()" >
+        <label class="item item-input">
+          <input  style="float:left" ng-model="srch.term"  name="term" type='text' placeholder="Search keywords .. e.g.(time management) "/>
+          <button style="float:left:height:100%" class='button button-small button-light ion-search' ng-click="srch.search()"></button>
+        </label>
+      </form>
+    </div>
+    <ion-list>
+      <ion-item ng-repeat="podcast in srch.podcasts" href="#/app/tracks/{{podcast.id}}">
+        {{podcast.podcast_title}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

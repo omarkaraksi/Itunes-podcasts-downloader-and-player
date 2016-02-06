@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>YouTube Music Player</title>
+
+
+
+    <link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css'>
+
+        <link rel="stylesheet" href="css/style.css">
+
+
+
+
+  </head>
+
+  <body>
+
+    <div class='container' ng-app='player' ng-cloak>
+  <div ng-controller='MainCtrl'>
+    <div ng-show='main.currentIndex'>
+      <div id="player"></div>
+    </div>
+
+    <div class='row' ng-if='selectedEntry'>
+      <div class='col-xs-4'>
+        <p>
+          <button class='btn btn-block btn-success' ng-click="playVideo()">Play</button>
+        </p>
+      </div>
+      <div class='col-xs-4'>
+        <p>
+          <button class='btn btn-block btn-primary' ng-click="pauseVideo()">Pause</button>
+        </p>
+      </div>
+      <div class='col-xs-4'>
+        <p>
+          <button class='btn btn-block btn-default' ng-click='selectNextEntry()'>Next</button>
+        </p>
+      </div>
+    </div>
+
+    <div class='row' ng-if='selectedEntry'>
+      <div class='col-sm-12'>
+        <p>
+          <input type='range' min='0' max='100' steps='1' ng-model='playerVolume' ng-change='setPlayerVolume(playerVolume)'>
+        </p>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-sm-12'>
+        <p>
+          <input placeholder='YouTube Username' class='form-control' type='text'  ng-change='loadRecentVideos()'>      
+        </p>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-sm-12'>
+        <table class='table table-hover'>
+          <tbody>
+            <tr ng-class='{ info: main.currentIndex == $index }' ng-click='selectEntry($index)' ng-repeat='entry in userData.feed.entry'>
+              <td><img height='25px' ng-src='{{ entry.media$group.media$thumbnail[3].url }}'></td>
+              <td>{{ entry.media$group.media$title.$t }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js'></script>
+<script src='https://rawgithub.com/clouddueling/angular-common/master/modules/youtube/youtube.js'></script>
+
+        <script src="js/index.js"></script>
+
+
+
+
+  </body>
+</html>

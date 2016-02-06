@@ -1,0 +1,24 @@
+<ion-view view-title="Tracks" ng-controller="TracksCtrl">
+
+  <ion-content>
+
+      <ion-audio-track ng-repeat="track in tracks" track="track">
+        {{track.url=track.track_mp3_url;""}}
+        {{track.title=track.track_title;""}}
+        <div class="card">
+          <div class="item">
+            <h2>{{track.title}}</h2>
+            <ion-audio-controls>
+              <button class="button button-small button-assertive icon-left" ion-audio-play text-play="Play" text-pause="Pause"></button>
+              <ion-spinner></ion-spinner>
+            </ion-audio-controls>
+            <a class="track-btn"  target="_self" href="{{track.track_mp3_url}}" download><i class="ion-ios-cloud-download"></i></a>
+            <a class="track-btn" href="" href="#/app/play/{{track.id}}" ><i class="ion-play"></i></a>
+          </div>
+          <div class="item item-divider item-stable">
+            <ion-audio-progress-bar display-time display-info></ion-audio-progress-bar>
+          </div>
+        </div>
+      </ion-audio-track>
+  </ion-content>
+</ion-view>
