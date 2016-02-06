@@ -31,11 +31,16 @@ module.exports = {
 		customMiddleware: function(app) {
 
 			var express = require('express');
-
 			app.use(express['static'](process.cwd() + '/api'));
-			app.use(app.router);;
+			app.use(app.router);
+
+			// app.get('/*',function(req,res,next){
+			// 	req.header('Keep-Alive','timeout=15, max=5000');
+			// 	req.header('Connection' ,'Keep-Alive');
+			// 	next();
+			// })
 			app.use(express.csrf());
 		}
-	}
+	},
 
 };

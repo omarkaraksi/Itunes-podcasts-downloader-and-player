@@ -1,4 +1,5 @@
 var request = require('request');
+var configs = sails.config.configs;
 var PodcastsController = {
 	index :function(req,res){
 		//console.log(req)
@@ -9,36 +10,50 @@ var PodcastsController = {
 	search :function(req,res){
 		var term = req.query.term || ''
 		var entity = req.query.entity || ''
-		var data = {};
+		var isNew = req.query.isNew || false
+		// console.log(isNew,'new')
 		PodcastsService.search(term,entity,
 			function(body){
 				data = body;
 				PodcastsService.saveSearcResults(body,
 					function(err,results){
-						console.log(results);
+						//console.log(err,results,'sssssssss');
 						PodcastsService.proccessFeedData(results,
 							function(feed,isLast,podcastId){
 								feed =JSON.parse(feed)
 
-								PodcastsService.ParseAndSaveFeed(feed,podcastId)
+								var isLast = configs.podcasts_limit;
+							//	console.log('is_last',isLast)
 
-								if(!isLast){
+									PodcastsService.ParseAndSaveFeed(feed,podcastId,function(proccesedResults){
+										// if(isLast){
+											if(isNew){
+												//console.log("Thats Newewewe")
+												PodcastsService.searchPodcasts(term,function(results){
+														console.log(1)
+													//res.write();
+													res.end(JSON.stringify(results))
+												})
+											}else if(!isNew && isLast){
+												console.log(2)
+												 res.end(JSON.stringify({'msg':'doneIndexing'}))
+											}else{
+												console.log(3)
+												res.end(JSON.stringify({'msg':'err'}))
+											}
 
-									//res.write(feed)
-								}else{
-									//console.log(feed.rss.channel[0].item[0].enclosure)
-									//res.write(feed.rss)
-									//res.setHeader('Content-Type', 'application/json');
-									res.end()
-								}
-							}
-						)
+										// }
+
+									})
+
+								//res.json({'msg':'doneIndexing2'})
+							})
 
 
 					});
 			}
 		);
-		res.end()
+		//res.end()
 	},
 	searchPodcasts :function(req,res){
 		var term     = req.query.term;
@@ -60,7 +75,7 @@ var PodcastsController = {
 					},
 				}
 			]
-		,limit:10},function(err,results){
+		,limit:65},function(err,results){
 			res.json(results)
 		})
 	},
@@ -72,7 +87,7 @@ var PodcastsController = {
 		var findby = [];
 		var findyId = {}
 		if(podId){
-			Tracks.find({'owner':podId,limit:12},function(err,results){
+			Tracks.find({owner:podId,limit:50},function(err,results){
 				res.json(results)
 			})
 		}else if(tracktitle){

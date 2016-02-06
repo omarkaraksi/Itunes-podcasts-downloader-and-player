@@ -7,6 +7,14 @@ module.exports.connections = {
 		no_ready_check :true
 
 	},
+	mysql :{
+		module	 : 'sails-mysql',
+		host		 : 'localhost',
+		password : '1',
+		port		 :  3306,
+		user 		 : 'root',
+		database : 'podcasts'
+	},
 	someMongoDb: {
     adapter: 'sails-mongo',
     host: 'ds051595.mongolab.com', // defaults to `localhost` if omitted

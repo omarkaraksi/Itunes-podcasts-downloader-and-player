@@ -8,11 +8,15 @@
 module.exports = {
   //connection :'redis',
   attributes: {
+    'id' :{
+      columnName : 'tracks_id',
+      primaryKey: true,
+      type : 'INTEGER'
+    },
   	'track_title':'STRING',
   	'track_mp3_url':'STRING',
   	'track_length':'FLOAT',
-    'podcasts_id':'INTEGER',
-     owner: {
+    podcasts: {
       type: 'INTEGER',
       columnName: 'podcasts_id',
       model: 'Podcasts'
