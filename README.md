@@ -2,7 +2,7 @@
 
 Search , listen and download you favorite podcasts from itunes from android (no tested yet) or web using this amazing app made up using ionic for frontend and sails for the backend
 
-you can easily for mysql or mongodb as well
+you can configure it for mysql  and  mongodb as well
 
 ## Screenshots
 ![Alt text](podcasts-search-results.png?raw=true "Podcasts Search tab")
@@ -11,7 +11,7 @@ you can easily for mysql or mongodb as well
 ## Installation
 ---------------
 
-  ## Backend Installation
+  ##Backend Installation
   1. `cd /path/to/Itunes-podcasts-downloader-and-player`
   2. `sudo npm install`
   3. `sudo bower install`
