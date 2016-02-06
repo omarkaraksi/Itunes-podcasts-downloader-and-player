@@ -9,13 +9,13 @@ you can configure it for mysql  and  mongodb as well
 ![Alt text](tracks-player.png?raw=true "Tracks Download/play tab")
 
 # Installation
-  # backend installation    
+### Backend installation    
   1. `cd /path/to/Itunes-podcasts-downloader-and-player`
   2. `sudo npm install`
   3. `sudo bower install`
   4.  then open url: `http://localhost:1339/podcasts/search?term=<keyword>&entity=podcasts`
 
-  # frontend Installation
+### frontend Installation
   1. `cd /path/to/Itunes-podcasts-downloader-and-player/frontend-ionic`
   2. `sudo npm install`
   3. `sudo bower install`
